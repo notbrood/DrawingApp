@@ -24,10 +24,26 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="5dp"
+        android:layout_marginBottom="4dp"
         android:scaleType="fitXY"
         android:src="@drawable/large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/ib_color"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="4dp"
+        android:scaleType="fitXY"
+        android:src="@android:drawable/ic_notification_overlay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.581"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 

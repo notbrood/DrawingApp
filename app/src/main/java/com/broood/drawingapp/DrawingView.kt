@@ -89,6 +89,9 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
 
         mDrawPaint!!.strokeWidth = mBrushSize
     }
+    fun setColor(x: String){
+        mColor = Color.parseColor(x)
+    }
 
     internal inner class CustomPath(var color: Int, var brushThickness: Float): android.graphics.Path() {
 
