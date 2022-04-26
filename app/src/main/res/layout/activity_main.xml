@@ -6,8 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.broood.drawingapp.DrawingView
-        android:id="@+id/drawingView"
+
+    <FrameLayout
+        android:id="@+id/fl_drawing_view_container"
+        android:padding="1dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="5dp"
@@ -17,7 +19,24 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageView
+            android:id="@+id/iv_background"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <com.broood.drawingapp.DrawingView
+            android:id="@+id/drawingView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80FFFFFF"
+
+            />
+
+    </FrameLayout>
+
 
     <ImageButton
         android:id="@+id/ib_brush"
@@ -28,7 +47,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/large"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ib_color"
         app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -45,6 +64,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.581"
         app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/ib_gallery"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="4dp"
+        android:scaleType="fitXY"
+        android:src="@android:drawable/ic_menu_gallery"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.786"
+        app:layout_constraintStart_toEndOf="@+id/ib_color"
         tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
