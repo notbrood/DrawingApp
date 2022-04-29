@@ -1,5 +1,5 @@
 # DrawingApp
-A simple drawing canvas app to take quick notes or for children to draw.
+A simple drawing canvas app to take quick notes or for children to draw!
 
 ## Libs and Techniques
 
