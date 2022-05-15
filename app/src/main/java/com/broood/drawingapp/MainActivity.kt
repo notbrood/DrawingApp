@@ -4,11 +4,15 @@ import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
 import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Message
 import android.provider.MediaStore
+import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
@@ -73,6 +77,10 @@ class MainActivity : AppCompatActivity() {
         val ibUndo: ImageButton = findViewById<ImageButton>(R.id.ib_undo)
         ibUndo.setOnClickListener{
             drawingView?.onClickUndo()
+        }
+        val ibSave: ImageButton = findViewById<ImageButton>(R.id.ib_save)
+        ibSave.setOnClickListener{
+
         }
 
     }
@@ -148,5 +156,17 @@ class MainActivity : AppCompatActivity() {
             .setMessage(message)
             .setPositiveButton("Cancel"){dialog, _ -> dialog.dismiss()}
         builder.create().show()
+    }
+    private fun getBitmapFromView(view: View) : Bitmap {
+        val returnedBitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(returnedBitmap)
+        val bgDrawable = view.background
+        if(bgDrawable != null){
+            bgDrawable.draw(canvas)
+        }else{
+            canvas.drawColor(Color.WHITE)
+        }
+        view.draw(canvas)
+        return returnedBitmap
     }
 }
