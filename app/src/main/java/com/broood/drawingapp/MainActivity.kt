@@ -13,12 +13,21 @@ import android.os.Bundle
 import android.os.Message
 import android.provider.MediaStore
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     private var drawingView: DrawingView? = null
@@ -80,7 +89,10 @@ class MainActivity : AppCompatActivity() {
         }
         val ibSave: ImageButton = findViewById<ImageButton>(R.id.ib_save)
         ibSave.setOnClickListener{
-
+            lifecycleScope.launch {
+                val flDrawingView: FrameLayout = findViewById(R.id.fl_drawing_view_container)
+                saveBitmapFile(getBitmapFromView(flDrawingView))
+            }
         }
 
     }
@@ -168,5 +180,34 @@ class MainActivity : AppCompatActivity() {
         }
         view.draw(canvas)
         return returnedBitmap
+    }
+    private suspend fun saveBitmapFile(mBitmap: Bitmap?) : String{
+        var result = ""
+        withContext(Dispatchers.IO){
+            if(mBitmap != null){
+                try {
+                    val bytes = ByteArrayOutputStream()
+                    mBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+                    val f = File(externalCacheDir?.absoluteFile.toString() + File.separator + "KidDrawingApp_"+ System.currentTimeMillis()/1000)
+                    val fo = FileOutputStream(f)
+                    fo.write(bytes.toByteArray())
+                    fo.close()
+                    result = f.absolutePath
+                    runOnUiThread{
+                        if(result.isNotEmpty()){
+                            Toast.makeText(this@MainActivity, "File Saved successfully :$result", Toast.LENGTH_SHORT).show()
+                        }else{
+                            Toast.makeText(this@MainActivity, "nai hui save, error hogya", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                catch (e: Exception){
+                    result = ""
+                    e.printStackTrace()
+                }
+
+            }
+        }
+        return result
     }
 }
