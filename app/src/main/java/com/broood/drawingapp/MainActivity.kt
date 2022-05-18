@@ -187,7 +187,7 @@ class MainActivity : AppCompatActivity() {
                 try {
                     val bytes = ByteArrayOutputStream()
                     mBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-                    val f = File(externalCacheDir?.absoluteFile.toString() + File.separator + "KidDrawingApp_"+ System.currentTimeMillis()/1000)
+                    val f = File(externalCacheDir?.absoluteFile.toString() + File.separator + "KidDrawingApp_"+ System.currentTimeMillis()/1000 + ".png")
                     val fo = FileOutputStream(f)
                     fo.write(bytes.toByteArray())
                     fo.close()
