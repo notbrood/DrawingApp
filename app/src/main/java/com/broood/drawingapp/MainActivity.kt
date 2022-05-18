@@ -31,7 +31,6 @@ import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     private var drawingView: DrawingView? = null
-    private var mImageButtonCurrentPaint: ImageButton? = null
     val openGalleryLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         result ->
         if(result.resultCode == RESULT_OK && result.data!=null){
